@@ -3,6 +3,8 @@ package com.project.HRM.entity;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Employee {
@@ -24,6 +27,8 @@ public class Employee {
 	    private String name;
 
 	    private String email;
+	    
+	    private String password;
 	    
 	    private String role;
 
@@ -37,6 +42,7 @@ public class Employee {
 
 	    @ManyToOne
 	    @JoinColumn(name = "department_id")
+	    @JsonBackReference
 	    private Department department;
 
 	    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
@@ -58,6 +64,9 @@ public class Employee {
 	        inverseJoinColumns = @JoinColumn(name = "training_id")
 	    )
 	    private List<TrainingProgram> trainingPrograms;
+	    
+	    @Transient
+	    private int departmentId;
 
 	    //Constructors
 		public Employee() {
@@ -67,7 +76,7 @@ public class Employee {
 		public Employee(Long id, String name, String email, String position, Double salary, Date dateOfJoining,
 				String status, Department department, List<Attendance> attendanceRecords,
 				List<LeaveRequest> leaveRequests, List<PerformanceReview> performanceReviews, List<Payroll> payrolls,
-				List<TrainingProgram> trainingPrograms,String role) {
+				List<TrainingProgram> trainingPrograms,String role,int departmentId,String password) {
 			super();
 			this.id = id;
 			this.name = name;
@@ -83,6 +92,8 @@ public class Employee {
 			this.payrolls = payrolls;
 			this.trainingPrograms = trainingPrograms;
 			this.role = role;
+			this.departmentId = departmentId;
+			this.password = password;
 		}
 
 	    // Getters and Setters
@@ -197,6 +208,23 @@ public class Employee {
 		public void setRole(String role) {
 			this.role = role;
 		}
+
+		public int getDepartmentId() {
+			return departmentId;
+		}
+
+		public void setDepartmentId(int departmentId) {
+			this.departmentId = departmentId;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		
 		
 	
 }

@@ -7,19 +7,19 @@ import com.project.HRM.entity.JobPosition;
 
 public interface JobPositionService {
 
-	// Save Department
+	// Save JobPosition
 	public JobPosition saveJobPosition(JobPosition jobPosition);
 
-	// Get All Departments
+	// Get All JobPosition
 	public List<JobPosition> getAllJobPositions();
 
-	// Get Department by Id
+	// Get JobPosition by Id
 	public JobPosition getJobPositionById(int jobPositionId);
 
-	// Update Department by Id
+	// Update JobPosition by Id
 	public JobPosition updateJobPosition(JobPosition jobPosition, int jobPositionId);
 
-	// Delete Department by Id
+	// Delete JobPosition by Id
 	public String deleteJobPosition(int jobPositionId);
 
 }
